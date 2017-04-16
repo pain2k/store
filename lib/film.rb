@@ -1,5 +1,5 @@
 class Film < Product
-  attr_reader :cost, :sum, :title, :year, :director
+  attr_accessor :title, :year, :director
   def initialize(params)
     super
     @title = params[:title]
