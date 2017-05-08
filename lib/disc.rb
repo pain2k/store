@@ -19,9 +19,10 @@ class Disc < Product
     @title = params[:title]
     @year = params[:year]
     @performer = params[:performer]
+    @genre = params[:genre]
   end
 
   def to_s
-    "Диск #{@title}, #{@year}, #{@genre}, исп. #{@performer}, #{super}"
+    "Диск #{@title}, #{@year}, #{@genre}, #{@performer}, #{super}"
   end
 end
