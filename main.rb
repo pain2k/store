@@ -6,15 +6,20 @@ if Gem.win_platform?
     io.set_encoding(Encoding.default_external, Encoding.default_internal)
   end
 end
+
 require_relative 'lib/product'
 require_relative 'lib/book'
 require_relative 'lib/film'
+require_relative 'lib/product_collection'
 
-product = Film.new(title: 'Леон', director: 'Люк Бессон', price: 990)
+collection = ProductCollection.from_dir(File.dirname(__FILE__) + '/data')
 
-product.year = 1994
-product.amount = 5
+# Сортируем продукты по возрастанию цены с помощью метода sort! экземпляра
+# класса ProductCollection
+collection.sort!(by: :price, order: :asc)
 
-puts 'Вот какие товары у нас есть:'
-puts
-puts product
+# Получаем массив продуктов методом to_a и выводим каждый на экран, передавая
+# его методу puts в качестве аргумента.
+collection.to_a.each do |product|
+  puts product
+end
