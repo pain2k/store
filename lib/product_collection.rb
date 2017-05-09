@@ -1,4 +1,5 @@
 class ProductCollection
+  attr_reader :sum, :purchase_list
   PRODUCT_TYPES = {
     film: {dir: "films", class: Film},
     book: {dir: "books", class: Book},
@@ -7,6 +8,8 @@ class ProductCollection
 
   def initialize(products = [])
     @products = products
+    @purchase_list = []
+    @sum = 0
   end
 
   def self.from_dir(dir_path)
@@ -43,6 +46,33 @@ class ProductCollection
     @products.reverse! if params[:order] == :asc
 
    self
+  end
+
+  def show
+    @products.each_with_index do |product, index|
+      puts "#{index + 1}. #{product}"
+    end
+    puts "0. Выход"
+    print ">"
+  end
+
+
+  def calc(user_choice)
+    if user_choice == 0
+      return
+    elsif user_choice > @products.size
+      puts
+      puts "Неправильный ввод, повторите попытку"
+      puts
+    else
+      @sum += @products[user_choice - 1].price
+      @purchase_list << @products[user_choice - 1]
+      @products[user_choice - 1].amount -= 1
+      @products.delete_if { |product| product.amount == 0 }
+      puts
+      puts "Вы выбрали товаров на сумму: #{@sum} руб."
+    end
+
   end
 
 end
