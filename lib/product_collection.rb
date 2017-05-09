@@ -1,5 +1,5 @@
 class ProductCollection
-  attr_reader :sum, :purchase_list
+  attr_reader :sum
   PRODUCT_TYPES = {
     film: {dir: "films", class: Film},
     book: {dir: "books", class: Book},
@@ -73,6 +73,10 @@ class ProductCollection
       puts "Вы выбрали товаров на сумму: #{@sum} руб."
     end
 
+  end
+
+  def choosen
+    @purchase_list
   end
 
 end

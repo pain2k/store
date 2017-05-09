@@ -13,26 +13,26 @@ require_relative 'lib/film'
 require_relative 'lib/disc'
 require_relative 'lib/product_collection'
 
-collection = ProductCollection.from_dir(File.dirname(__FILE__) + '/data')
-collection.sort!(by: :price, order: :asc)
+product_list = ProductCollection.from_dir(File.dirname(__FILE__) + '/data')
+product_list.sort!(by: :price, order: :asc)
 
 puts "Что хотите купить:"
 
 user_choice = nil
 until user_choice == 0 do
-  if collection.to_a.size == 0
+  if product_list.to_a.size == 0
     puts "К сожалению на прилавке пусто, приходите в другой день!"
     break
   end
-  collection.show
+  product_list.show
   user_choice = STDIN.gets.to_i
-  collection.calc(user_choice)
+  product_list.calc(user_choice)
 end
 puts
 puts "Вы купили:"
 puts
-puts collection.purchase_list
+puts product_list.choosen
 puts
-puts "С Вас - #{collection.sum} руб. Спасибо за покупки!"
+puts "С Вас - #{product_list.sum} руб. Спасибо за покупки!"
 
 
